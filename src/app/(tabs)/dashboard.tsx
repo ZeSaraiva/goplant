@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Index.tsx!</Text>
+      <Text style={styles.text}>Working On...</Text>
     </View>
   );
 }
