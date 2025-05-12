@@ -1,6 +1,7 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
@@ -31,7 +32,7 @@ export default function TabLayout() {
         name="procurar"
         options={{
           title: 'Procurar',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color="#4CAF50" />,
+          tabBarIcon: ({ color }) => <FontAwesome5 name="search" size={24} color="#4CAF50" />,
         }}
       />
            
