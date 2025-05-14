@@ -1,11 +1,23 @@
 // Importação de bibliotecas e módulos necessários
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TextInput, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, Image, TextInput, FlatList, TouchableOpacity, Alert } from "react-native";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../lib/firebaseConfig"; // ajusta o caminho conforme o teu projeto
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PlantaGuardada } from "../../PlantaGuardada";
+import * as Notifications from "expo-notifications";
+
+// Handler para exibir notificações mesmo com o app aberto (Expo Go)
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
 
 // Componente principal que exibe a lista de plantas
 export default function ListaPlantas() {

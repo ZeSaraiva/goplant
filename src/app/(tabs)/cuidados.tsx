@@ -3,6 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PlantaGuardada } from '../../PlantaGuardada';
 import { View, Text, Image, TouchableOpacity, Switch, ScrollView } from 'react-native';
 import { useFocusEffect } from 'expo-router';
+import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
 
 export default function Cuidados() {
   const [plantasGuardadas, setPlantasGuardadas] = useState<PlantaGuardada[]>([]);
@@ -22,6 +24,17 @@ export default function Cuidados() {
       atualizarPlantasGuardadas();
     }, [])
   );
+
+  useEffect(() => {
+    // Pedir permissão para notificações ao abrir a app
+    Notifications.requestPermissionsAsync();
+    if (Platform.OS === 'android') {
+      Notifications.setNotificationChannelAsync('rega', {
+        name: 'Rega das Plantas',
+        importance: Notifications.AndroidImportance.HIGH,
+      });
+    }
+  }, []);
 
   const diasDesdeUltimaRega = (ultima: string) => {
     const ultimaData = new Date(ultima);
@@ -63,6 +76,30 @@ export default function Cuidados() {
     await AsyncStorage.setItem('plantasGuardadas', JSON.stringify(atualizadas));
     atualizarPlantasGuardadas();
   };
+
+  // Função para disparar notificação local simples
+  const notificarPlanta = async (planta: PlantaGuardada) => {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: `Hora de regar: ${planta.nome_comum}`,
+        body: `A tua planta precisa de água hoje! 💧`,
+        sound: Platform.OS === 'android' ? undefined : 'default',
+      },
+      trigger: null, // dispara imediatamente
+    });
+  };
+
+  // Verifica e dispara notificação para plantas que precisam de rega
+  useEffect(() => {
+    plantasGuardadas.forEach(planta => {
+      if (planta.notificacoes_ativas) {
+        const dias = Math.floor((new Date().getTime() - new Date(planta.ultima_rega).getTime()) / (1000 * 60 * 60 * 24));
+        if (dias >= planta.frequencia_agua) {
+          notificarPlanta(planta);
+        }
+      }
+    });
+  }, [plantasGuardadas]);
 
   return (
     <ScrollView style={{ backgroundColor: '#f3f4f6', padding: 16 }}>
