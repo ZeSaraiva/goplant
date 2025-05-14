@@ -55,7 +55,7 @@ export default function PlantaDetalhe() {
       <Text style={{ marginBottom: 8 }}><Text style={{ fontWeight: "bold" }}>Família:</Text> {planta.familia}</Text>
       <Text style={{ marginBottom: 8 }}><Text style={{ fontWeight: "bold" }}>Luminosidade:</Text> {planta.luminosidade}</Text>
       <Text style={{ marginBottom: 8 }}><Text style={{ fontWeight: "bold" }}>Temperatura:</Text> {planta.temperatura}</Text>
-      <Text style={{ marginBottom: 8 }}><Text style={{ fontWeight: "bold" }}>Frequência de Água:</Text> {planta.frequencia_agua}</Text>
+      <Text style={{ marginBottom: 8 }}><Text style={{ fontWeight: "bold" }}>Frequência de Água (Dias):</Text> {planta.frequencia_agua}</Text>
       <Text style={{ marginBottom: 8 }}><Text style={{ fontWeight: "bold" }}>Quantidade de Água:</Text> {planta.quantidade_agua}</Text>
     </ScrollView>
   );
