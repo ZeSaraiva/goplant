@@ -108,27 +108,33 @@ export default function ListaPlantas() {
                 elevation: 2,
               }}
             >
-              {/* Imagem da planta */}
-              <Image
-                source={{ uri: item.imagem_url }}
-                style={{
-                  width: 44,
-                  height: 44,
-                  borderRadius: 8,
-                  marginRight: 10,
-                  backgroundColor: "#eee",
-                }}
-              />
-              <View style={{ flex: 1 }}>
-                {/* Nome comum da planta */}
-                <Text style={{ fontWeight: "bold", fontSize: 15, color: "#222" }}>
-                  {item.nome_comum}
-                </Text>
-                {/* Nome científico da planta */}
-                <Text style={{ fontStyle: "italic", color: "#888", fontSize: 12 }}>
-                  {item.nome_cientifico}
-                </Text>
-              </View>
+              <TouchableOpacity
+                onPress={() => router.push(`/plantas/${item.id}`)}
+                style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
+                activeOpacity={0.7}
+              >
+                {/* Imagem da planta */}
+                <Image
+                  source={{ uri: item.imagem_url }}
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 8,
+                    marginRight: 10,
+                    backgroundColor: "#eee",
+                  }}
+                />
+                <View style={{ flex: 1 }}>
+                  {/* Nome comum da planta */}
+                  <Text style={{ fontWeight: "bold", fontSize: 15, color: "#222" }}>
+                    {item.nome_comum}
+                  </Text>
+                  {/* Nome científico da planta */}
+                  <Text style={{ fontStyle: "italic", color: "#888", fontSize: 12 }}>
+                    {item.nome_cientifico}
+                  </Text>
+                </View>
+              </TouchableOpacity>
               {/* Botão para adicionar/remover planta */}
               <TouchableOpacity
                 onPress={() =>
