@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Switch, ScrollView, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PlantaGuardada } from '../../PlantaGuardada';
-import { View, Text, Image, TouchableOpacity, Switch, ScrollView } from 'react-native';
-import { useFocusEffect } from 'expo-router';
 import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
+import { PlantaGuardada } from '../../PlantaGuardada';
+
+// Handler atualizado para evitar warning de deprecated
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowBanner: true,
+    shouldShowList: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 export default function Cuidados() {
   const [plantasGuardadas, setPlantasGuardadas] = useState<PlantaGuardada[]>([]);
@@ -19,14 +27,7 @@ export default function Cuidados() {
     atualizarPlantasGuardadas();
   }, []);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      atualizarPlantasGuardadas();
-    }, [])
-  );
-
   useEffect(() => {
-    // Pedir permissão para notificações ao abrir a app
     Notifications.requestPermissionsAsync();
     if (Platform.OS === 'android') {
       Notifications.setNotificationChannelAsync('rega', {
@@ -54,25 +55,6 @@ export default function Cuidados() {
     const atualizadas = plantasGuardadas.map(planta =>
       planta.id === id ? { ...planta, notificacoes_ativas: !planta.notificacoes_ativas } : planta
     );
-    await AsyncStorage.setItem('plantasGuardadas', JSON.stringify(atualizadas));
-    atualizarPlantasGuardadas();
-  };
-
-  const adicionarPlanta = async (planta: any) => {
-    const dataUmMesAntes = new Date();
-    dataUmMesAntes.setMonth(dataUmMesAntes.getMonth() - 1);
-    const nova: PlantaGuardada = {
-      ...planta,
-      ultima_rega: dataUmMesAntes.toISOString(),
-      notificacoes_ativas: true,
-    };
-    const atualizadas = [...plantasGuardadas, nova];
-    await AsyncStorage.setItem('plantasGuardadas', JSON.stringify(atualizadas));
-    atualizarPlantasGuardadas();
-  };
-
-  const removerPlanta = async (id: string) => {
-    const atualizadas = plantasGuardadas.filter((p) => p.id !== id);
     await AsyncStorage.setItem('plantasGuardadas', JSON.stringify(atualizadas));
     atualizarPlantasGuardadas();
   };
@@ -141,3 +123,7 @@ export default function Cuidados() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  // ...existing code...
+});

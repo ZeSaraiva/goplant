@@ -127,7 +127,7 @@ export default function Dashboard() {
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 24 }}>
         {plantasGuardadas.slice(-4).reverse().map((planta) => (
           <TouchableOpacity key={planta.id} onPress={() => router.push(`/plantas/${planta.id}`)} style={{ backgroundColor: '#fff', borderRadius: 14, marginRight: 12, width: 140, padding: 10, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 4, elevation: 1 }}>
-            <Image source={{ uri: planta.imagem_url }} style={{ width: '100%', height: 70, borderRadius: 10, marginBottom: 8, backgroundColor: '#eee' }} />
+            <Image source={{ uri: planta.imagem_url }} style={{ width: '200%', height: 70, borderRadius: 10, marginBottom: 8, backgroundColor: '#eee' }} />
             <Text style={{ fontWeight: 'bold', fontSize: 15, color: '#222' }}>{planta.nome_comum}</Text>
             <Text style={{ color: '#888', fontSize: 12 }}>Ver detalhes</Text>
           </TouchableOpacity>
