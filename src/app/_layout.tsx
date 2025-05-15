@@ -4,6 +4,7 @@ export default function Layout() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="plantas/[id]" options={{ headerShown: true, title: 'Detalhe da Planta' }} />
     </Stack>
   );
 }
