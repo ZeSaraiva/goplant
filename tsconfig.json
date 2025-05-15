@@ -1,12 +1,14 @@
 {
-  // Removido extends que não existe
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "src/*"
+      ]
     },
     "esModuleInterop": true
-  }
+  },
+  "extends": "expo/tsconfig.base"
 }
