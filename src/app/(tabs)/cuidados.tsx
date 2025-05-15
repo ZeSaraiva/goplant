@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Switch, ScrollView, Pl
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import { PlantaGuardada } from '../../PlantaGuardada';
+import { useRouter, useFocusEffect } from 'expo-router';
 
 // Handler atualizado para evitar warning de deprecated
 Notifications.setNotificationHandler({
@@ -22,6 +23,13 @@ export default function Cuidados() {
     if (stored) setPlantasGuardadas(JSON.parse(stored));
     else setPlantasGuardadas([]);
   };
+
+  // Atualiza plantas guardadas ao focar a tab
+  useFocusEffect(
+    React.useCallback(() => {
+      atualizarPlantasGuardadas();
+    }, [])
+  );
 
   useEffect(() => {
     atualizarPlantasGuardadas();

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, TextInput, FlatList, TouchableOpacity } from "react-native";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../lib/firebaseConfig"; // ajusta o caminho conforme o teu projeto
-import { useRouter } from "expo-router";
+import { useRouter, useFocusEffect } from "expo-router";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PlantaGuardada } from '../../PlantaGuardada';
 
@@ -34,9 +34,22 @@ export default function ListaPlantas() {
     const fetchPlantasGuardadas = async () => {
       const stored = await AsyncStorage.getItem('plantasGuardadas');
       if (stored) setPlantasGuardadas(JSON.parse(stored));
+      else setPlantasGuardadas([]);
     };
     fetchPlantasGuardadas();
   }, []);
+
+  // Atualiza plantas guardadas ao focar a tab
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchPlantasGuardadas = async () => {
+        const stored = await AsyncStorage.getItem('plantasGuardadas');
+        if (stored) setPlantasGuardadas(JSON.parse(stored));
+        else setPlantasGuardadas([]);
+      };
+      fetchPlantasGuardadas();
+    }, [])
+  );
 
   // useEffect para filtrar as plantas com base no termo de pesquisa
   useEffect(() => {
