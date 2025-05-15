@@ -24,12 +24,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zsaraiva.goplant",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.zsaraiva.goplant"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e7938508-9c25-4414-86c2-222e83aa57ce"
       }
     }
   }

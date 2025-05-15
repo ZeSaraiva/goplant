@@ -15,10 +15,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="plantas"
+        name="scanner"
         options={{
-          title: 'Plantas',
-          tabBarIcon: ({ color }) =><FontAwesome6 name="plant-wilt" size={24} color="#4CAF50" />,
+          title: 'Scanner',
+          tabBarIcon: ({ color }) =><FontAwesome6 name="qrcode" size={24} color="#4CAF50" />,
         }}
       />
             <Tabs.Screen
