@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { PlantaGuardada } from '../../PlantaGuardada';
@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [proximasAcoes, setProximasAcoes] = useState<any[]>([]);
   const [dica, setDica] = useState<string | null>(null);
   const router = useRouter();
+  const screenWidth = Dimensions.get('window').width;
 
   // Atualiza ao focar o tab
   useFocusEffect(
@@ -64,7 +65,11 @@ export default function Dashboard() {
     : null;
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#f3f4f6' }} contentContainerStyle={{ padding: 16 }}>
+    <ScrollView
+      style={{ flex: 1, backgroundColor: '#f3f4f6' }}
+      contentContainerStyle={{ padding: 16 }}
+      scrollEnabled={false}
+    >
       <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16, color: '#222' }}>Go Plant</Text>
       {/* Dica do dia */}
       {dica && (
@@ -126,10 +131,43 @@ export default function Dashboard() {
       <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 8 }}>Plantas recentes</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 24 }}>
         {plantasGuardadas.slice(-4).reverse().map((planta) => (
-          <TouchableOpacity key={planta.id} onPress={() => router.push(`/plantas/${planta.id}`)} style={{ backgroundColor: '#fff', borderRadius: 14, marginRight: 12, width: 140, padding: 10, shadowColor: '#000', shadowOpacity: 0.04, shadowRadius: 4, elevation: 1 }}>
-            <Image source={{ uri: planta.imagem_url }} style={{ width: '200%', height: 70, borderRadius: 10, marginBottom: 8, backgroundColor: '#eee' }} />
-            <Text style={{ fontWeight: 'bold', fontSize: 15, color: '#222' }}>{planta.nome_comum}</Text>
-            <Text style={{ color: '#888', fontSize: 12 }}>Ver detalhes</Text>
+          <TouchableOpacity
+            key={planta.id}
+            onPress={() => router.push(`/plantas/${planta.id}`)}
+            style={{
+              backgroundColor: '#fff',
+              borderRadius: 18,
+              marginRight: 16,
+              width: screenWidth - 32,
+              padding: 0,
+              shadowColor: '#000',
+              shadowOpacity: 0.07,
+              shadowRadius: 8,
+              elevation: 2,
+              overflow: 'hidden',
+            }}
+            activeOpacity={0.85}
+          >
+            <Image
+              source={{ uri: planta.imagem_url }}
+              style={{
+                width: '100%',
+                height: 180,
+                borderTopLeftRadius: 18,
+                borderTopRightRadius: 18,
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                marginBottom: 0,
+                backgroundColor: '#e5f7eb',
+                borderWidth: 0,
+              }}
+              resizeMode="cover"
+            />
+            <View style={{ padding: 14 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#22543d', marginBottom: 2 }}>{planta.nome_comum}</Text>
+              <Text style={{ color: '#888', fontSize: 13, fontStyle: 'italic', marginBottom: 6 }}>{planta.nome_cientifico}</Text>
+              <Text style={{ color: '#22c55e', fontSize: 13, fontWeight: 'bold' }}>Ver detalhes</Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
