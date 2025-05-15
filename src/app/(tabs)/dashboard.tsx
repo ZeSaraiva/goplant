@@ -70,16 +70,9 @@ export default function Dashboard() {
       contentContainerStyle={{ padding: 16 }}
       scrollEnabled={false}
     >
-      <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16, color: '#222' }}>Go Plant</Text>
-      {/* Dica do dia */}
-      {dica && (
-        <View style={{ backgroundColor: '#eaf6ea', borderRadius: 14, padding: 16, marginBottom: 18, flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ fontSize: 22, marginRight: 10 }}>💡</Text>
-          <Text style={{ color: '#22543d', flex: 1 }}>{dica}</Text>
-        </View>
-      )}
+    
       {/* Cards principais */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 16,  marginTop: 16 }}>
         <View style={styles.card}>
           <View style={{ backgroundColor: '#eaf6ea', borderRadius: 999, width: 48, height: 48, alignItems: 'center', justifyContent: 'center', marginBottom: 8 }}>
             <Text style={{ fontSize: 28, color: '#22543d' }}>🌡️</Text>

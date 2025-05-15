@@ -6,7 +6,25 @@ import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "#4CAF50" }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: '#4CAF50',
+        headerTitleAlign: 'center',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: 38,
+          color: '#22c55e',
+          letterSpacing: 1.2,
+          marginTop: 8,
+        },
+        headerStyle: {
+          backgroundColor: '#f3f4f6',
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{ href: null }}
@@ -14,33 +32,35 @@ export default function TabLayout() {
       <Tabs.Screen
         name="dashboard"
         options={{
-          title: 'Dashboard',
+          title: 'GoPlant',
+          tabBarLabel: 'Dashboard',
           tabBarIcon: ({ color }) => <MaterialIcons size={28} name="dashboard" color="#4CAF50" />,
         }}
       />
       <Tabs.Screen
         name="scanner"
         options={{
-          title: 'Scanner',
           tabBarIcon: ({ color }) =><FontAwesome6 name="qrcode" size={24} color="#4CAF50" />,
+          title: 'GoPlant',
+          tabBarLabel: 'Scanner',
         }}
       />
-            <Tabs.Screen
+      <Tabs.Screen
         name="cuidados"
         options={{
-          title: 'Cuidados',
+          title: 'GoPlant',
+          tabBarLabel: 'Cuidados',
           tabBarIcon: ({ color }) => <FontAwesome6 name="sun-plant-wilt" size={28} color="#4CAF50" />,
         }}
       />
-            <Tabs.Screen
+      <Tabs.Screen
         name="procurar"
         options={{
-          title: 'Procurar',
+          title: 'GoPlant',
+          tabBarLabel: 'Procurar',
           tabBarIcon: ({ color }) => <FontAwesome5 name="search" size={24} color="#4CAF50" />,
         }}
       />
-           
     </Tabs>
-    
   );
 }
