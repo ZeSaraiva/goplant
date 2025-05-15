@@ -140,10 +140,6 @@ export default function Dashboard() {
               marginRight: 16,
               width: screenWidth - 32,
               padding: 0,
-              shadowColor: '#000',
-              shadowOpacity: 0.07,
-              shadowRadius: 8,
-              elevation: 2,
               overflow: 'hidden',
             }}
             activeOpacity={0.85}
