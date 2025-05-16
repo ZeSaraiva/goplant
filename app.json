@@ -38,10 +38,7 @@
       "package": "com.zsaraiva.goplant"
     },
     "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "e7938508-9c25-4414-86c2-222e83aa57ce"
-      }
+      "router": {}
     }
   }
 }
